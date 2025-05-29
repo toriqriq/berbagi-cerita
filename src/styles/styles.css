@@ -1,0 +1,177 @@
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+/* Gunakan font default Bootstrap, jika perlu override */
+body {
+  font-family: "Arial", sans-serif;
+}
+
+/* Container utama */
+.container {
+  max-width: 1300px;
+}
+
+/* Header */
+header {
+  background-color: lightskyblue;
+}
+
+.main-header {
+  min-height: 90px;
+  padding-block: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+/* Brand / Logo */
+.brand-name {
+  font-size: 1.125rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+/* Navigasi samping */
+.navigation-drawer {
+  width: 200px;
+  padding: 20px 10px;
+  background-color: #fff;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  box-shadow: 0 0 4px 2px #00000033;
+  transform: translateX(-100%);
+  transition: transform 350ms ease;
+  z-index: 9999;
+}
+
+.navigation-drawer.open {
+  transform: translateX(0);
+}
+
+/* Tombol drawer (untuk mobile, jika digunakan) */
+.drawer-button {
+  background-color: transparent;
+  border: 0;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #141e16;
+}
+
+/* Daftar navigasi */
+.nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-list li a {
+  display: block;
+  padding: 6px 10px;
+  color: #333;
+  text-decoration: none;
+}
+
+.nav-list li a:hover {
+  text-decoration: underline;
+}
+
+/* Konten utama */
+.main-content {
+  padding-block: 20px;
+}
+
+/* Responsif untuk desktop */
+@media screen and (min-width: 1000px) {
+  .navigation-drawer {
+    position: static;
+    width: auto;
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+    transform: translateX(0);
+  }
+
+  .nav-list {
+    flex-direction: row;
+  }
+
+  .nav-list li a {
+    display: inline-block;
+  }
+
+  .drawer-button {
+    display: none;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+
+  .fade-in-visible {
+    opacity: 1;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  left: auto;
+  background-color: #0d6efd; /* bootstrap primary */
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  font-weight: 500;
+}
+
+::view-transition-old(*) {
+  animation: fadeOutView 1500ms forwards;
+}
+
+::view-transition-new(*) {
+  animation: fadeInView 1500ms forwards;
+}
+
+@keyframes fadeOutView {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInView {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
