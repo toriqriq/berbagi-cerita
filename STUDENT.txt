@@ -1,4 +1,4 @@
-https://username.github.io/reponame/
+https://toriqriq.github.io/berbagi-cerita/
 
 
 APP_URL=<url_aplikasi>
