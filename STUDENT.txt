@@ -1,2 +1,5 @@
+https://username.github.io/reponame/
+
+
 APP_URL=<url_aplikasi>
 MAP_SERVICE_API_KEY=<api_key>
