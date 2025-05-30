@@ -1,5 +1,19 @@
 import registerServiceWorker from "../../background/service-worker-register.js";
-registerServiceWorker();
+
+registerServiceWorker()
+  .then(() => {
+    // Service Worker sudah terdaftar, lanjut ke subscribe push
+    subscribeUserToPush();
+  })
+  .catch((error) => {
+    console.error("Service Worker registration error:", error);
+  });
+
+import { subscribeUserToPush } from "./push-presenter.js";
+
+registerServiceWorker().then(() => {
+  subscribeUserToPush();
+});
 
 import routes from "../routes/routes";
 import { getActiveRoute } from "../routes/url-parser";
