@@ -42,6 +42,9 @@ class StoryView {
               <a href="#/story/${
                 story.id
               }" class="btn btn-outline-primary mt-2">Lihat Detail</a>
+              <button class="btn btn-outline-success mt-2 btn-save-story" data-id="${
+                story.id
+              }">Simpan Cerita</button>
             </div>
           </div>
         </div>
@@ -53,6 +56,19 @@ class StoryView {
   showError(message) {
     if (!this.storyListContainer) return;
     this.storyListContainer.innerHTML = `<p class="text-danger">Gagal memuat cerita. ${message}</p>`;
+  }
+
+  getSaveButtons() {
+    return document.querySelectorAll(".btn-save-story");
+  }
+
+  bindSaveButton(handler) {
+    this.storyListContainer.addEventListener("click", (event) => {
+      if (event.target.classList.contains("btn-save-story")) {
+        const storyId = event.target.dataset.id;
+        handler(storyId);
+      }
+    });
   }
 }
 
