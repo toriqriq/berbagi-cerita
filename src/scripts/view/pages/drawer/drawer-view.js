@@ -8,6 +8,7 @@ drawer.innerHTML = `
     <li><a href="#/home">Beranda</a></li>
     <li><a href="#/bagikan">Bagikan Cerita</a></li>
     <li><a href="#/about">About</a></li>
+    <li><a href="#/favorite">Favorit</a></li>
     <li><a href="#" id="logoutBtn">Logout</a></li>
   </ul>
 `;

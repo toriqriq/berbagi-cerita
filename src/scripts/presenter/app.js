@@ -89,7 +89,7 @@ class App {
 
     if (
       !isLoggedIn &&
-      ["/home", "/story", "/story/:id", "/bagikan"].includes(url)
+      ["/home", "/story", "/story/:id", "/bagikan", "/favorite"].includes(url)
     ) {
       appView.setLocationHash("#/login");
       return;

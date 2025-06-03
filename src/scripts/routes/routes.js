@@ -13,6 +13,7 @@ import AboutPage from "../view/pages/about/about-page";
 import StoryPage from "../view/pages/story/story-page";
 import StoryDetailPage from "../view/pages/story/story-detail-page";
 import BagikanPage from "../view/pages/bagikan/bagikan-page";
+import FavoritePage from "../view/pages/favorite/favorite-page";
 
 const routes = {
   "/": LandingPage, // landing page sebelum login
@@ -23,6 +24,7 @@ const routes = {
   "/story": StoryPage, // Tambahkan ini
   "/story/:id": StoryDetailPage, // ← ini penting
   "/bagikan": BagikanPage, // ✅ Tambahkan ini
+  "/favorite": FavoritePage,
 };
 
 export default routes;
