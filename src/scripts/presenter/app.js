@@ -1,19 +1,33 @@
 import registerServiceWorker from "../../background/service-worker-register.js";
+import { subscribeUserToPush, unsubscribeUser } from "./push-presenter.js";
 
+let swRegistration = null;
+
+// 1. Daftarkan service worker saat halaman dimuat
 registerServiceWorker()
-  .then(() => {
-    // Service Worker sudah terdaftar, lanjut ke subscribe push
-    subscribeUserToPush();
+  .then((registration) => {
+    console.log("SW berhasil didaftarkan");
+    swRegistration = registration;
   })
   .catch((error) => {
-    console.error("Service Worker registration error:", error);
+    console.error("SW gagal didaftarkan:", error);
   });
 
-import { subscribeUserToPush } from "./push-presenter.js";
-
-registerServiceWorker().then(() => {
-  subscribeUserToPush();
+// 2. Jalankan subscribe saat tombol diklik
+document.getElementById("btn-subscribe").addEventListener("click", async () => {
+  const permission = await Notification.requestPermission();
+  if (permission === "granted") {
+    await subscribeUserToPush(swRegistration); // <- Kirim hasil dari registerServiceWorker
+  } else {
+    alert("Izin notifikasi ditolak");
+  }
 });
+
+document
+  .getElementById("btn-unsubscribe")
+  ?.addEventListener("click", async () => {
+    await unsubscribeUser(swRegistration);
+  });
 
 import routes from "../routes/routes";
 import { getActiveRoute } from "../routes/url-parser";
