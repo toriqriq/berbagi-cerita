@@ -95,6 +95,8 @@ class App {
       return;
     }
 
+    //ini untuk menu navigasi
+
     const PageClass = routes[url];
 
     if (!PageClass) {
