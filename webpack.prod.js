@@ -30,7 +30,7 @@ module.exports = merge(common, {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      template: "./src/index.html", // sesuaikan path ke file html utama kamu
+      template: "./src/public/index.html", // sesuaikan path ke file html utama kamu
       filename: "index.html", // nama file output di dist/
     }),
   ],
