@@ -1,4 +1,4 @@
-https://toriqriq.github.io/berbagi-cerita/
+https://berbagi-cerita.vercel.app/
 
 
 APP_URL=<url_aplikasi>
