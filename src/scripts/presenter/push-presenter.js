@@ -8,6 +8,10 @@ function urlBase64ToUint8Array(base64String) {
   return Uint8Array.from([...rawData].map((char) => char.charCodeAt(0)));
 }
 
+function getAccessToken() {
+  return localStorage.getItem("token"); // atau "token", sesuaikan nama key-mu
+}
+
 export async function subscribeUserToPush(registration) {
   if (!("serviceWorker" in navigator)) return;
   if (!("PushManager" in window)) return;
@@ -19,17 +23,39 @@ export async function subscribeUserToPush(registration) {
   }
 
   try {
+    // 1. Subscribing
     const subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey: urlBase64ToUint8Array(publicVapidKey),
     });
+
     console.log(
       "Push subscription berhasil:",
       JSON.stringify(subscription.toJSON())
     );
-    // Kirim ke server jika perlu
+
+    // 2. Mengambil endpoint & keys
+    const { endpoint, keys } = subscription.toJSON();
+    const accessToken = getAccessToken(); // Pastikan fungsi ini mengembalikan token
+    console.log("Token yang dikirim:", accessToken);
+
+    // 3. Kirim subscription ke server
+    const response = await fetch(
+      "https://story-api.dicoding.dev/v1/notifications/subscribe",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ endpoint, keys }),
+      }
+    );
+
+    const json = await response.json();
+    console.log("Subscription berhasil dikirim ke server:", json);
   } catch (error) {
-    console.error("Gagal subscribe push:", error);
+    console.error("Gagal subscribe atau kirim ke server:", error);
   }
 }
 

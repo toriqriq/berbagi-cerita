@@ -1,22 +1,26 @@
-const CACHE_NAME = "berbagi-cerita-v1";
-const STATIC_ASSETS = [
-  "/",
-  "/index.html",
-  "/manifest.json",
-  "/icons/icon-192.png",
-  "/icons/icon-512.png",
-  "/app.bundle.js",
-  "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css",
-  "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js", //
-];
+// const CACHE_NAME = "berbagi-cerita-v1";
+// const STATIC_ASSETS = [
+//   "/",
+//   "/index.html",
+//   "/manifest.json",
+//   "/icons/icon-192.png",
+//   "/icons/icon-512.png",
+//   "/app.bundle.js",
+//   "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css",
+//   "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js", //
+// ];
 
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS);
-    })
-  );
-});
+// self.addEventListener("install", (event) => {
+//   event.waitUntil(
+//     caches.open(CACHE_NAME).then((cache) => {
+//       return cache.addAll(STATIC_ASSETS);
+//     })
+//   );
+// });
+
+import { precacheAndRoute } from "workbox-precaching";
+
+precacheAndRoute(self.__WB_MANIFEST);
 
 self.addEventListener("fetch", (event) => {
   event.respondWith(
