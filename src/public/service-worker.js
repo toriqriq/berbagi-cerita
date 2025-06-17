@@ -7,6 +7,8 @@ const STATIC_ASSETS = [
   "/icons/icon-512.png",
   "/app.bundle.js", // sesuaikan dengan nama bundle Webpack kamu
   // Tambahkan file statis lain yang jadi bagian Application Shell
+  "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css",
+  "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js", // jika kamu pakai
 ];
 
 self.addEventListener("install", (event) => {
