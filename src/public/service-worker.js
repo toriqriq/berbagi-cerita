@@ -5,10 +5,9 @@ const STATIC_ASSETS = [
   "/manifest.json",
   "/icons/icon-192.png",
   "/icons/icon-512.png",
-  "/app.bundle.js", // sesuaikan dengan nama bundle Webpack kamu
-  // Tambahkan file statis lain yang jadi bagian Application Shell
+  "/app.bundle.js",
   "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css",
-  "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js", // jika kamu pakai
+  "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js", //
 ];
 
 self.addEventListener("install", (event) => {
@@ -44,19 +43,29 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("push", (event) => {
   let data = {
     title: "Notifikasi Baru",
-    body: "Ini isi notifikasinya.",
+    body: "Ada pesan baru.",
     url: "/",
   };
+
   if (event.data) {
-    data = event.data.json();
+    try {
+      data = event.data.json(); // Coba parsing JSON
+    } catch (e) {
+      // Jika bukan JSON (cuma string biasa), pakai sebagai body
+      data.body = event.data.text();
+    }
   }
+
   const options = {
     body: data.body,
     icon: "/icons/icon-192.png",
     badge: "/icons/icon-192.png",
-    data: { url: data.url },
+    data: { url: data.url || "/" },
   };
-  event.waitUntil(self.registration.showNotification(data.title, options));
+
+  event.waitUntil(
+    self.registration.showNotification(data.title || "Notifikasi", options)
+  );
 });
 
 self.addEventListener("notificationclick", (event) => {

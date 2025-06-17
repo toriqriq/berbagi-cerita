@@ -23,7 +23,10 @@ export async function subscribeUserToPush(registration) {
       userVisibleOnly: true,
       applicationServerKey: urlBase64ToUint8Array(publicVapidKey),
     });
-    console.log("Push subscription berhasil:", subscription);
+    console.log(
+      "Push subscription berhasil:",
+      JSON.stringify(subscription.toJSON())
+    );
     // Kirim ke server jika perlu
   } catch (error) {
     console.error("Gagal subscribe push:", error);
